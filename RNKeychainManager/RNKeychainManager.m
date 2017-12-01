@@ -110,7 +110,11 @@ RCT_EXPORT_METHOD(setGenericPasswordForOptions:(NSDictionary *)options withUsern
 
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+        
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -121,7 +125,11 @@ RCT_EXPORT_METHOD(setGenericPasswordForOptions:(NSDictionary *)options withUsern
   // Create dictionary of parameters to add
   NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
   dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, accessibleValue(options), kSecAttrAccessible, service, kSecAttrService, passwordData, kSecValueData, username, kSecAttrAccount, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -144,7 +152,11 @@ RCT_EXPORT_METHOD(getGenericPasswordForOptions:(NSDictionary *)options resolver:
 
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -182,7 +194,11 @@ RCT_EXPORT_METHOD(resetGenericPasswordForOptions:(NSDictionary *)options resolve
 
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -202,7 +218,11 @@ RCT_EXPORT_METHOD(setInternetCredentialsForServer:(NSString *)server withUsernam
 {
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword),  kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -214,6 +234,10 @@ RCT_EXPORT_METHOD(setInternetCredentialsForServer:(NSString *)server withUsernam
   NSData* passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
   dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, accessibleValue(options), kSecAttrAccessible, server, kSecAttrServer, passwordData, kSecValueData, username, kSecAttrAccount, nil];
 
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -233,7 +257,11 @@ RCT_EXPORT_METHOD(getInternetCredentialsForServer:(NSString *)server withOptions
 {
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
-
+  
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
@@ -270,6 +298,10 @@ RCT_EXPORT_METHOD(resetInternetCredentialsForServer:(NSString *)server withOptio
   // Create dictionary of search parameters
   NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
 
+  if (options && options[@"synchronizable"]) {
+    [dict setObject:kCFBooleanTrue forKey:kSecAttrSynchronizable];
+  }
+  
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
   }
